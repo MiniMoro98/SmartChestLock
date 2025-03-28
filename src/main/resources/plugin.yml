@@ -1,0 +1,16 @@
+name: SmartChestLock
+version: ${project.version}
+main: it.moro.smartChestLock.SmartChestLock
+api-version: '1.21'
+commands:
+  smartchestlock:
+    description: Reload configuration
+    usage: /smartchestlock reload
+  lock:
+    description: lock a chest
+    usage: /lock
+
+permissions:
+  smartchestlock.lock:
+    description: Permission to lock chest.
+    default: true

@@ -1,0 +1,39 @@
+#Various chest protections
+break-protection: true
+hopper-protection: true
+explosion-protection: true
+
+max-distance-lock: 4
+#All editable messages of the plugin
+message:
+  msg1: "&cNon puoi rompere questa chest perchè non ti appartiene!"
+  msg2: "&cQuesta chest non ti appartiene!"
+  msg3: "&cNon hai accesso a questa chest!"
+  msg4: "&e+-------- &6[SmartChestLocker] &e--------+"
+  msg5: "&fDesideri bloccare la chest? "
+  msg6: "&e------------------------------------"
+  msg7: "&e +---&6[SmartChestLocker]&e---+"
+  msg8: "&eNessun giocatore assegnato."
+  msg9: "&cRimuovi %player%"
+  msg10: "&aAggiungi un nuovo giocatore"
+  msg11: "&aProtezione rimossa dalla chest!"
+  msg12: "&4Rimuove la protezione dalla chest"
+  msg13: "&e-------------------------"
+  msg14: "&aIl giocatore %player% è stato rimosso!"
+  msg15: "&aInserisci il nome del giocatore in chat:"
+  msg16: "&cNon puoi inserire il tuo stesso nome!"
+  msg17: "&cGiocatore non trovato."
+  msg18: "&cIl giocatore %player% è già presente!"
+  msg19: "&aGiocatore %player% aggiunto con successo!"
+  msg20: "&cTimeout scaduto. Operazione annullata."
+  msg21: "&eSei davvero sicuro di voler\n sbloccare la chest?"
+  msg22: "&eSei sicuro di voler rimuovere"
+  msg23: "&e%player% ?"
+  msg24: "&eDevi aspettare ancora %time% per ritirare una chiave!"
+  msg25: "&aHai ricevuto una chiave!"
+  msg26: "&cLa chiave che stai utilizzando non può aprire questa chest!"
+  msg27: "&eTi serve una chiave per poter aprire questa chest."
+  msg28: "&cNon puoi piazzare una tramoggia sotto una chest protetta!"
+  msg29: "&cNon puoi modificare le chest degli altri giocatori!"
+  msg30: "§cNon hai l'autorizzazione per aprire questa chest"
+  msg31: "§CNon hai il permesso per questo!"
