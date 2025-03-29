@@ -9,8 +9,23 @@ commands:
   lock:
     description: lock a chest
     usage: /lock
+  unlock:
+    description: unlock a chest
+    usage: /unlock
 
 permissions:
   smartchestlock.lock:
     description: Permission to lock chest.
     default: true
+  smartchestlock.add:
+    description: Permission to add player.
+    default: true
+  smartchestlock.remove:
+    description: Permission to remove player.
+    default: true
+  smartchestlock.reload:
+    description: Permission to reload plugin configuration
+    default: true
+  smartchestlock.bypass:
+    description: Permission to bypass chest protection.
+    default: op

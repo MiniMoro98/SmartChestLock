@@ -1,8 +1,6 @@
 package it.moro.smartChestLock;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -38,10 +36,10 @@ public class Commands implements CommandExecutor, TabCompleter {
                 return true;
             }
         } else if (command.getName().equalsIgnoreCase("smartchestlock")) {
-            if(args.length == 1){
-                if(args[0].equalsIgnoreCase("reload")){
+            if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("reload")) {
                     if (sender instanceof Player player) {
-                        if(player.hasPermission("smartchestlock.reload")){
+                        if (player.hasPermission("smartchestlock.reload")) {
                             reloadConfig();
                             player.sendMessage("§a[SmartChestLock] Configuration reloaded!");
                         }
@@ -55,103 +53,88 @@ public class Commands implements CommandExecutor, TabCompleter {
         return false;
     }
 
-    void elaborazione(Player player,String command, String[] args){
-        if(command.equalsIgnoreCase("lock")) {
+    void elaborazione(Player player, String command, String[] args) {
+        if (command.equalsIgnoreCase("lock")) {
             if (args.length == 0) {
                 Block block = player.getTargetBlockExact(config.getInt("max-distance-lock"));
-                if(block != null && (block.getType() == Material.CHEST || block.getType() == Material.TRAPPED_CHEST)){
+                if (block != null && (block.getType() == Material.CHEST || block.getType() == Material.TRAPPED_CHEST)) {
                     String uuid = event.getUUID(block);
-                    if(uuid != null){
-                        if(uuid.equalsIgnoreCase(player.getUniqueId().toString())){
-                           event.printInfo(block, player);
+                    if (uuid != null) {
+                        if (uuid.equalsIgnoreCase(player.getUniqueId().toString())) {
+                            event.printInfo(block, player);
                         } else {
-                            player.sendMessage("Questa chest è protetta da " + event.getNameFromUUID(UUID.fromString(uuid)));
+                            player.sendMessage(getString("message.msg3").replace("%player%", event.getNameFromUUID(UUID.fromString(uuid))));
                         }
                     } else {
-                        if(event.isDoubleChest(block)){
-                            Block second = event.getDoubleChestBlock(block);
-                            event.assegnaUUID(block, player, true);
-                            event.assegnaUUID(second, player, false);
-                            event.printInfo(block, player);
-                        } else {
-                            event.assegnaUUID(block, player, true);
-                            event.printInfo(block, player);
+                        if (event.isDoubleChest(block)) {
+                            event.assegnaUUID(event.getDoubleChestBlock(block), player, false);
                         }
+                        event.assegnaUUID(block, player, true);
+                        event.printInfo(block, player);
                     }
                 }
             } else if (args.length == 1) {
-                if(args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove")){
-                    player.sendMessage("§eNon hai inserito il nome del giocatore!\n§eUsa: /lock add|remove <player>");
+                if (args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("remove")) {
+                    player.sendMessage(getString("message.msg12"));
                 }
             } else if (args.length == 2) {
-                if(args[0].equalsIgnoreCase("add")){
-                    OfflinePlayer target = Bukkit.getPlayerExact(args[1]);
-                    if(target != null){
-                        Block block = player.getTargetBlockExact(config.getInt("max-distance-lock"));
-                        if(block != null && (block.getType() == Material.CHEST || block.getType() == Material.TRAPPED_CHEST)){
-                            String uuid = event.getUUID(block);
-                            if(uuid != null){
-                                if(uuid.equalsIgnoreCase(player.getUniqueId().toString())){
-                                    if(event.isDoubleChest(block)){
-                                        event.aggiungiGiocatore(player, target.getName(), block, true);
-                                        event.aggiungiGiocatore(player, target.getName(), event.getDoubleChestBlock(block), false);
-                                    } else {
-                                        event.aggiungiGiocatore(player, target.getName(), block, true);
-                                    }
-                                } else {
-                                    player.sendMessage("§cQuesta chest non ti appartiene!");
+                if (args[0].equalsIgnoreCase("add")) {
+                    Block block = player.getTargetBlockExact(config.getInt("max-distance-lock"));
+                    if (block != null && (block.getType() == Material.CHEST || block.getType() == Material.TRAPPED_CHEST)) {
+                        String uuid = event.getUUID(block);
+                        if (uuid != null) {
+                            if (uuid.equalsIgnoreCase(player.getUniqueId().toString())) {
+                                if (event.isDoubleChest(block)) {
+                                    event.aggiungiGiocatore(player, args[1], event.getDoubleChestBlock(block), false);
                                 }
+                                event.aggiungiGiocatore(player, args[1], block, true);
+                                event.printInfo(block, player);
+                            } else {
+                                player.sendMessage(getString("message.msg11"));
                             }
                         }
                     }
-                } else if(args[0].equalsIgnoreCase("remove")){
-                    OfflinePlayer target = Bukkit.getPlayerExact(args[1]);
-                    if(target != null){
-                        Block block = player.getTargetBlockExact(config.getInt("max-distance-lock"));
-                        if(block != null && (block.getType() == Material.CHEST || block.getType() == Material.TRAPPED_CHEST)){
-                            String uuid = event.getUUID(block);
-                            if(uuid != null){
-                                if(uuid.equalsIgnoreCase(player.getUniqueId().toString())){
-                                    if(event.isDoubleChest(block)){
-                                        event.rimuoviGiocatore(player, target.getName(), block, true);
-                                        event.rimuoviGiocatore(player, target.getName(), event.getDoubleChestBlock(block), false);
-                                    } else {
-                                        event.rimuoviGiocatore(player, target.getName(), block, true);
-                                    }
-                                } else {
-                                    player.sendMessage(getString());
+                } else if (args[0].equalsIgnoreCase("remove")) {
+                    Block block = player.getTargetBlockExact(config.getInt("max-distance-lock"));
+                    if (block != null && (block.getType() == Material.CHEST || block.getType() == Material.TRAPPED_CHEST)) {
+                        String uuid = event.getUUID(block);
+                        if (uuid != null) {
+                            if (uuid.equalsIgnoreCase(player.getUniqueId().toString())) {
+                                if (event.isDoubleChest(block)) {
+                                    event.rimuoviGiocatore(player, args[1], event.getDoubleChestBlock(block), false);
                                 }
+                                event.rimuoviGiocatore(player, args[1], block, true);
+                                event.printInfo(block, player);
+                            } else {
+                                player.sendMessage(getString("message.msg11"));
                             }
                         }
                     }
                 }
             }
-        } else if(command.equalsIgnoreCase("unlock")){
+        } else if (command.equalsIgnoreCase("unlock")) {
             if (args.length == 0) {
                 Block block = player.getTargetBlockExact(config.getInt("max-distance-lock"));
-                if(block != null && (block.getType() == Material.CHEST || block.getType() == Material.TRAPPED_CHEST)){
+                if (block != null && (block.getType() == Material.CHEST || block.getType() == Material.TRAPPED_CHEST)) {
                     String uuid = event.getUUID(block);
-                    if(uuid != null){
-                        if(uuid.equalsIgnoreCase(player.getUniqueId().toString())){
-                            if(event.isDoubleChest(block)){
-                                event.rimuoviUUID(block, player, true);
+                    if (uuid != null) {
+                        if (uuid.equalsIgnoreCase(player.getUniqueId().toString())) {
+                            if (event.isDoubleChest(block)) {
                                 event.rimuoviUUID(event.getDoubleChestBlock(block), player, false);
-                            } else {
-                                event.rimuoviUUID(block, player,true);
-
                             }
+                            event.rimuoviUUID(block, player, true);
                         } else {
-                            player.sendMessage("§cNon puoi sbloccare chest di altri giocatori!");
+                            player.sendMessage(getString("message.msg13"));
                         }
                     } else {
-                        player.sendMessage("§eQuesta chest non è bloccata!");
+                        player.sendMessage(getString("message.msg14"));
                     }
                 }
             }
         }
     }
 
-    void reloadConfig(){
+    void reloadConfig() {
         config = YamlConfiguration.loadConfiguration(fileConfig);
         Events event = new Events(plugin);
         event.reloadConfig();
@@ -159,7 +142,7 @@ public class Commands implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(command.getName().equalsIgnoreCase("smartchestlock")) {
+        if (command.getName().equalsIgnoreCase("smartchestlock")) {
             Player player = (Player) sender;
             if (player.hasPermission("smartchestlock.reload")) {
                 if (args.length == 1) {
@@ -171,11 +154,11 @@ public class Commands implements CommandExecutor, TabCompleter {
         return null;
     }
 
-    String getString() {
-        if (config.getString("message.msg2") != null) {
-            return Objects.requireNonNull(config.getString("message.msg2")).replaceAll("&", "§");
+    String getString(String text) {
+        if (config.getString(text) != null) {
+            return Objects.requireNonNull(config.getString(text)).replaceAll("&", "§");
         }
-        plugin.getLogger().info("Entry not found: " + "message.msg2");
+        plugin.getLogger().info("Entry not found: " + text);
         return "";
     }
 }

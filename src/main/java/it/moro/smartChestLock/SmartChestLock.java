@@ -24,6 +24,7 @@ public final class SmartChestLock extends JavaPlugin {
             getLogger().info("File config.yml created!");
         }
         Objects.requireNonNull(getCommand("lock")).setExecutor(new Commands(this));
+        Objects.requireNonNull(getCommand("unlock")).setExecutor(new Commands(this));
         Objects.requireNonNull(getCommand("smartchestlock")).setExecutor(new Commands(this));
         Events events = new Events(this);
         getServer().getPluginManager().registerEvents(events, this);
