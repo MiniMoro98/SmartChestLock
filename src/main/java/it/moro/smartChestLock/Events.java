@@ -330,12 +330,12 @@ public class Events implements Listener {
                 }
             }
             info.add("\n");
-            info.add(" " + "§6===== SmartChestLock =====");
-            info.add(" " + "Giocatori assegnati: (" + uuidList.size() + "/10)");
+            info.add(" " + getString("info.msg1"));
+            info.add(" " + getString("info.msg2")  +" (" + uuidList.size() + "/10)");
             for (String s : uuidList) {
-                info.add(" §e> " + s);
+                info.add(" " + getString("info.msg3") + s);
             }
-            info.add(" " + "§6========================");
+            info.add(" " + getString("info.msg4"));
 
             for (String text : info) {
                 player.sendMessage(text);

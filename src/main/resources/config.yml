@@ -6,18 +6,25 @@ explosion-protection: true
 max-distance-lock: 4
 #All editable messages of the plugin
 message:
-  msg1: "&cNon puoi rompere questa chest perchè non ti appartiene!"
-  msg2: "&cNon puoi piazzare la chest qui!"
-  msg3: "&cNon hai accesso a questa chest! Appartiene a %player%"
-  msg4: "&aHai dato il permesso a %player% di usare la chest"
-  msg5: "&cHai terminato gli slot disponibili!"
-  msg6: "&aIl giocatore %player% è stato rimosso!"
-  msg7: "&aLa chest è stata bloccata!"
-  msg8: "&aLa chest è stata sbloccata!"
-  msg9: "&cNon puoi piazzare una tramoggia sotto una chest protetta!"
-  msg10: "&CNon hai il permesso per questo!"
-  msg11: "&cQuesta chest non ti appartiene!"
-  msg12: "&eNon hai inserito il nome del giocatore!\n&eUsa: /lock add | remove <player>"
-  msg13: "&cNon puoi sbloccare chest di altri giocatori!"
-  msg14: "&eQuesta chest non è bloccata!"
+  msg1: "&cYou cannot break this chest because it does not belong to you!"
+  msg2: "&cYou cannot place the chest here!"
+  msg3: "&cYou do not have access to this chest! It belongs to %player%"
+  msg4: "&aYou have granted %player% permission to use the chest"
+  msg5: "&cYou have run out of available slots!"
+  msg6: "&aPlayer %player% has been removed!"
+  msg7: "&aThe chest has been locked!"
+  msg8: "&aThe chest has been unlocked!"
+  msg9: "&cYou cannot place a hopper under a protected chest!"
+  msg10: "&cYou do not have permission for this!"
+  msg11: "&cThis chest does not belong to you!"
+  msg12: "&eYou did not enter the player's name!\n&eUse: /lock add | remove <player>"
+  msg13: "&cYou cannot unlock other players' chests!"
+  msg14: "&eThis chest is not locked!"
+
+info:
+  msg1: "&6===== SmartChestLock ====="
+  msg2: "&fPlayers assigned:"
+  msg3: "&e> "
+  msg4: "&6========================"
+
 

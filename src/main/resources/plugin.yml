@@ -26,6 +26,9 @@ permissions:
   smartchestlock.reload:
     description: Permission to reload plugin configuration
     default: true
+  smartchestlock.investigate:
+    description: Permission to investigate chests.
+    default: op
   smartchestlock.bypass:
     description: Permission to bypass chest protection.
     default: op
